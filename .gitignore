@@ -1,0 +1,34 @@
+# OS-specific junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor/IDE
+.idea/
+.vscode/
+.trae
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.temp
+*~
+*.bak
+*.old
+tmp/
+temp/
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Claude Code
+.claude/
+.remember/
+CLAUDE.md

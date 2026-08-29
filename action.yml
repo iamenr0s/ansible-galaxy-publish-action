@@ -1,0 +1,43 @@
+---
+# Originally created by L3D <l3d@c3woc.de>
+# https://github.com/ansible-actions/ansible-galaxy-action
+name: Ansible Galaxy Publish
+description: Action to release Ansible Roles or Collections to galaxy.ansible.com (galaxy-ng)
+author: iamenr0s <enros@pm.me>
+
+inputs:
+  galaxy_api_key:
+    description: |
+      Your personal Galaxy-NG API key
+      You find them on Galaxy-NG -> Collections -> API-Token.
+      The Token is valid for uploading ansible roles too.
+    required: true
+  galaxy_version:
+    description: |
+      The galaxy version for galaxy-ng.
+      Provided with the --branch "$galaxy_version" option on the galaxy import tool
+      Default is the GITHUB_REF_NAME
+      Ignored for collections (version comes from galaxy.yml).
+    required: false
+  path:
+    description: |
+      The location of your role or collection. (relative path)
+      Auto-detected: if galaxy.yml is found here, it is published as a collection,
+      otherwise it is imported as a role.
+    required: false
+    default: "./"
+  galaxy_api:
+    description: Ansible Galaxy API Endpunkt
+    required: false
+    default: "https://galaxy.ansible.com/api/"
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    GALAXY_API_KEY: ${{ inputs.galaxy_api_key }}
+    GIT_BRANCH: ${{ inputs.galaxy_version }}
+    TARGET_PATH: ${{ inputs.path }}
+    GALAXY_API: ${{ inputs.galaxy_api }}
+branding:
+  icon: 'upload-cloud'
+  color: 'black'
